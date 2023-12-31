@@ -1,0 +1,354 @@
+<html>
+<style>
+.b{
+	background-color: white;
+	border: none;
+}
+input, button{
+	background-color: black;
+	color: MediumSeaGreen;
+}
+*{
+	font-family: Consolas, monospace;
+}
+div{
+	white-space: pre;
+}
+iframe{
+	border-width: 10px;
+	border-color: red;
+}
+</style>
+<!--https://i.ibb.co/PZyZbTz/Untitled.png-->
+  <select onchange='' class="b">
+    <option>HOME</option>
+    <option>New</option>
+    <option>Open .html</option>
+	<option>Save locally</option>
+	<option>Copy to the Clipboard</option>
+	<option>Export file as a .html</option>
+  </select>
+  <select class="b">
+    <option>TEXT</option>
+    <option>Find</option>
+	<option>Find and Replace</option>
+  </select>
+<br>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@600&display=swap');
+</style>
+<iframe id="z" width="700" height="400">
+</iframe>
+<div style="position:absolute;left: 900px">
+<div style="background-color: cyan" id="A"></div>
+<input id="B"></input>
+<button onclick="let i = sq.length-1; while(i!=-1){sq[i].style=document.getElementById('B').value;i--};tq.textContent = tq.textContent.substring(0,tq.textContent.length-2)+'\t'+document.getElementById('B').value+'\n}'">Change rule</button>
+<br>
+<input id="C"></input>
+<button onclick='TEMP = document.getElementById("C").value;debugger;select();tq = document.createElement("div");tq.textContent = document.getElementById("C").value + "{\n\n}";tq.style.fontWeight = "bold";document.getElementById("A").append(tq);'>+</button>
+</div>
+<div id="y">
+</div>
+<button onclick="newFunction();">Add an attribute</button>
+<button onclick="flags[0]=(flags[0]&0xF7)+8">Put inside</button>
+<button onclick="newFunction2();">✔</button>
+<br>
+<button onclick="compiler()"> <b>▶️  Run</b></button>
+<div onclick="" id="q" style="color: MediumSeaGreen; background-color: black; font-family: 'Roboto Mono', monospace;">fart</div>
+<textarea id="g" readonly style="color: MediumSeaGreen; background-color: black; font-family: 'Roboto Mono', monospace;"></textarea>
+<br>
+<input id="n" style="white-space: pre;"></input>
+<button onclick="inside()" style="">+</button>
+</html>
+<script>
+window.onbeforeunload = function() {
+    return "If you did not save, than you will lose this forever. Are you sure you saved?";
+}
+let flags = new Uint8Array(1);
+let INT = -1;
+let TEMP = 0;
+let onechar = "";
+let listOFfunctions = 0;
+let statements = "functionlet"
+let functions = new Uint16Array(200);
+let selectedelement = document.getElementsByClassName('fart');
+let SELECTEDINPUT = 0;
+let sq;
+let tq;
+let FUNC = [function(){
+	INT=-1
+	TEMP=0
+	onechar = "";
+	listOFfunctions = 0;
+	selectedelement = undefined;
+	document.getElementById("q").textContent = "";
+	flags[0]=0;
+}]
+const div = document.getElementById('q')
+const actualDocument = document.getElementById('z').contentDocument.body
+document.getElementById('y').addEventListener("click", function (e){
+	if(e.target.nodeName == 'TEXT'){
+		e.target.nextElementSibling.nextElementSibling.remove();
+		e.target.nextElementSibling.remove();
+		e.target.remove();
+	}
+})
+function select(){
+	if(TEMP[0]=='#'){
+		sq = [document.getElementById('z').contentDocument.getElementById(TEMP.substring(1,TEMP.length))]
+	}else if(TEMP[0]=='.'){
+		sq = document.getElementById('z').contentDocument.getElementsByClassName(TEMP.substring(1,TEMP.length))
+	}else{
+		sq = document.getElementById('z').contentDocument.getElementsByTagName(TEMP)
+	}
+}
+function inside(){
+	node=document.createElement(document.getElementById('n').value)
+	if((node.nodeName != 'BR')&&(node.nodeName != 'HR')){
+		TEMP=prompt('What is going to be inside this?')
+		if((node.nodeName == 'INPUT')||(node.nodeName == 'OPTION')||(node.nodeName == 'LI')||(node.nodeName == 'METER')||(node.nodeName == 'PROGRESS')||(node.nodeName == 'OPTION')||(node.nodeName == 'PARAM')){
+			node.value = TEMP
+		}else if((node.name == 'EMBED')||(node.name == 'AUDIO')||(node.name == 'IMG')||(node.name == 'VIDEO')){
+			node.src = TEMP
+		}else if(node.name == 'IFRAME'){
+			node.contentDocument.body.innerHTML = TEMP
+		}else{
+			node.textContent = TEMP
+		}
+	}
+	document.getElementById('n').value = "";
+	actualDocument.append(node)
+}
+function newFunction2(){
+	let TEMP2 = document.getElementById('y').children.length
+	i = 0;
+	TEMP = document.getElementById('y').firstElementChild;
+	while(i<TEMP2){
+		if(TEMP.textContent.substring(0,2)=='on'){
+			element.setAttribute(TEMP.textContent.substring(0,TEMP.textContent.length-2), new Function(TEMP.nextElementSibling.value))
+		}else{
+			element.setAttribute(TEMP.textContent.substring(0,TEMP.textContent.length-2), TEMP.nextElementSibling.value)
+		}
+		TEMP=TEMP.nextElementSibling.nextElementSibling.nextElementSibling
+		i=i+3;
+	}
+}
+function newFunction(){
+	console.log(event.target)
+	if(flags[0]&4){
+		node = document.createElement("text")
+		node.textContent = document.getElementById('y').children[document.getElementById('y').children.length-2].value + ": "
+		node.style.color = 'red'
+		document.getElementById('y').replaceChild(node, document.getElementById('y').children[document.getElementById('y').children.length-2])
+		node.nextSibling.remove();
+		node = document.createElement('br')
+		document.getElementById('y').append(node)
+		event.target.textContent = 'Add an element';
+		flags[0]=flags[0]&0xFB;
+		event.target.nextElementSibling.nextElementSibling.hidden = false;
+	}else{
+		console.log('#')
+		node = document.createElement('input')
+		node.style.color = 'red'
+		node.autofocus = true
+		document.getElementById('y').append(node)
+		node = document.createTextNode(': ')
+		document.getElementById('y').append(node)
+		node = document.createElement('input')
+		document.getElementById('y').append(node)
+		flags[0]=(flags[0]&0xFB)+4;
+		event.target.textContent = 'OK';
+		event.target.nextElementSibling.nextElementSibling.hidden = true;
+	}
+}
+actualDocument.addEventListener("click", function (e){
+	console.log(e.target);
+	if(flags[0]&8){
+		e.target.append(element.cloneNode(true))
+		element.remove();
+		flags[0]=flags[0]&0xF7
+	}else{
+		console.log(e.target.prototypes)
+		TEMP=e.target.attributes.length
+		element=e.target
+		document.getElementById('y').textContent = "";
+		let i = 0;
+		while(i<TEMP){
+			node = document.createElement("text")
+			node.textContent = e.target.attributes[i].name + ": "
+			node.style.color = "red";
+			document.getElementById('y').append(node)
+			node = document.createElement("input")
+			node.textContent = e.target.attributes[i].value
+			node.style.color = "black";
+			document.getElementById('y').append(node)
+			node = document.createElement("br")
+			document.getElementById('y').append(node)
+			i++;
+		}
+	}
+})
+function blink(){
+	if(div.textContent[INT+1]==' '){
+		if(flags[0]&2){
+			div.textContent=div.textContent.slice(0,INT+1)+'|'+div.textContent.slice(INT+2,div.textContent.length);
+		}else{
+			div.textContent=div.textContent.slice(0,INT+1)+'█'+div.textContent.slice(INT+2,div.textContent.length);
+		}
+	}else{
+		div.textContent=div.textContent.slice(0,INT+1)+' '+div.textContent.slice(INT+2,div.textContent.length);
+	}
+	setTimeout(blink, 100)
+}
+window.addEventListener("click", function (e){
+	console.log('Click')
+	if(e.target==div){
+		flags[0]=flags[0]|1
+	}else{
+		flags[0]=flags[0]&0xFE
+	}
+})
+function incint(){
+	div.textContent=div.textContent.substring(0,INT+1)+div.textContent.substring(INT+2,div.textContent.length)
+	INT++;
+	div.textContent=div.textContent.substring(0,INT+1)+' '+div.textContent.substring(INT+1,div.textContent.length)
+} 
+window.addEventListener("keydown", function (e) {
+	if(flags[0]&1){
+		event.preventDefault()
+		if(e.key.length==1){
+			if(flags[0]&2){
+				incint();
+				div.textContent=div.textContent.substring(0,INT)+e.key+div.textContent.substring(INT,div.textContent.length)
+			}else{
+				div.textContent=div.textContent.substring(0,INT)+e.key+div.textContent.substring(INT+1,div.textContent.length)
+				incint();
+			}
+		}else{
+			console.log(e.key)
+			if(e.key=='Enter'){
+				incint();
+				div.textContent=div.textContent.substring(0,INT)+'\n'+div.textContent.substring(INT,div.textContent.length)
+			}else if(e.key=='ArrowLeft'){
+				div.textContent=div.textContent.substring(0,INT+1)+div.textContent.substring(INT+2,div.textContent.length)
+				INT--;
+				div.textContent=div.textContent.substring(0,INT+1)+' '+div.textContent.substring(INT+1,div.textContent.length)
+				console.log(div.textContent)
+			}else if(e.key=='Insert'){
+				flags[0]=(flags[0]&0xFD)+((~(flags[0]))&2)
+			}else if(e.key=='ArrowRight'){
+				incint()
+			}else if(e.key=='Backspace'){
+				div.textContent=div.textContent.substring(0,INT)+div.textContent.substring(INT+1,div.textContent.length)
+				INT--
+			}else if(e.key == 'ArrowUp'){
+				TEMP=0;
+				while((INT-TEMP!=0)&&(div.textContent[INT-TEMP]!='\n')){
+					TEMP++;
+				}
+				div.textContent=div.textContent.substring(0,INT+1)+div.textContent.substring(INT+2,div.textContent.length)
+				INT=INT-TEMP-1;
+				while((INT!=0)&&(div.textContent[INT]!='\n')){
+					INT--;
+				}
+				INT=INT+TEMP-1;
+				div.textContent=div.textContent.substring(0,INT+1)+' '+div.textContent.substring(INT+1,div.textContent.length)
+			}else if(e.key == 'ArrowDown'){
+				TEMP=0;
+				while((INT-TEMP!=0)&&(div.textContent[INT-TEMP]!='\n')){
+					TEMP++;
+				}
+				div.textContent=div.textContent.substring(0,INT+1)+div.textContent.substring(INT+2,div.textContent.length)
+				while(div.textContent[INT]!='\n'){
+					INT++;
+				}
+				INT=INT+TEMP+1;
+				div.textContent=div.textContent.substring(0,INT+1)+' '+div.textContent.substring(INT+1,div.textContent.length)
+			}else if(e.key == 'Tab'){
+				div.textContent=div.textContent.substring(0,INT+1)+' \t'+div.textContent.substring(INT+2,div.textContent.length)
+			}
+		}
+	}
+});
+onechar=div.textContent[INT+1]
+div.textContent=div.textContent.substring(0,INT+1)+' '+div.textContent.substring(INT+2,div.textContent.length);
+console.log(div.innerHTML[INT+1])
+blink();
+function compiler(){
+	div.textContent = div.textContent.substring(0,INT+1)+div.textContent.substring(INT+2)
+	let i = 0;
+	let j = 0;
+	let k = 0;
+	let l = 0;
+	let x;
+	TEMP = div.textContent.length
+	let string = "";
+	let string2 = "";
+	let FUNCTION;
+	while(true){
+		debugger;
+		if(div.textContent[i]=='/'){
+			if(div.textContent[i+1]=='/'){
+				if(div.textContent[i+2]=='/'){
+					FUNCTION = new Function(div.textContent.slice(0,i));
+					break;
+				}
+			}
+		}
+		i++;
+	}
+	i++;
+	i++;
+	i++;
+	while(i<TEMP){
+			j=0;
+			while(j<8){
+				if(div.textContent[i]==statements[j]){
+					j++;
+					i++;
+				}
+			}
+			if(j==8){
+				i++;
+				l=i;
+				while(div.textContent[i] != "("){
+					i++;
+				}
+				i++;
+				j=i;
+				while(div.textContent[i] != ")"){
+					i++;
+				}
+				i++;
+				if(div.textContent[i]=='\n'){
+					i++;
+				}
+				i++;
+				k=i;
+				while(div.textContent[i] != "}"){
+					console.log(div.textContent[i])
+					i++;
+				}
+				if(k-2-j==0){
+					x = new Function(div.textContent.substring(k,i))
+				}else{
+					x = new Function(div.textContent.substring(j,k).split(","),div.textContent.substring(k,i))
+				}
+				console.log(div.textContent.substring(l,j-1))
+				eval(div.textContent.substring(l,j-1)+'=x')
+				delete x;
+			}
+		i++;
+	}
+	div.textContent = div.textContent.substring(0,INT+1)+" "+div.textContent.substring(INT+2,div.textContent.length);
+	console.log(FUNCTION)
+	document.getElementById('g').value = "";
+	FUNCTION();
+}
+function CONSOLELOG(x){
+	const d = new Date();
+	document.getElementById('g').value=document.getElementById('g').value+x
+}
+</script>
+</html>
+

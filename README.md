@@ -1,10 +1,4 @@
 # Element Builder + JS-
-![image](https://github.com/codemanticism/websitebuilder/assets/67880895/9598751d-a93d-44ce-bd54-353e2ce1cdf9)
-
-
-### Element Builder + JS--
-
-
 Website builder is a browser application that allows you to build websites with HTML and CSS.
 
 I am still building a functionality which will allow for an easily debuggable way to program interactive behaviour, but it's not complete yet, the idea is that you can code anything (markup with HTML + formatting with CSS + interactivity with my own language) and debug it easily with a console window that is baked into the editor. One optimization I want to add is one where only the functions whose code has been changed recompile.
